@@ -1,0 +1,55 @@
+var str = '';
+var sufix = '';
+
+var arr = document.getElementsByTagName('pre')[0].innerHTML.replace(/<br>/g,'').split(',');
+
+var elements = document.getElementsByTagName('p')[0].innerHTML.match(/(\d)+/g);
+for(var i = 0; i < elements.length; ++i){
+		sufix += arr[elements[i]-1];
+}
+var orderedArr = arr.sort(function(a, b){return parseInt(a-b)});
+
+var arrCount = new Array();
+for(var i = 0; i < arr.length; ++i){
+	arrCount.push(0);
+}
+
+var max = 0;
+var maxIndex = 0;
+
+var mean = parseInt(0);
+var median = parseInt(0);
+if(arr.length % 2 == 1)
+	median = orderedArr[parseInt(arr.length + 1)/2 - 1];
+else
+	median = (parseInt(orderedArr[parseInt(arr.length)/2 - 1]) + parseInt(orderedArr[parseInt(arr.length)/2]))/2;
+
+var mode = parseInt(0);
+
+for(var i = 0; i < arr.length; ++i){
+	mean += parseInt(arr[i]);
+	if(arrCount[parseInt(arr[i])] == undefined)
+		arrCount[parseInt(arr[i])] = 1;
+	else
+		arrCount[parseInt(arr[i])]++;
+}
+mean /= arr.length;
+
+
+for (var i = 0; i < arrCount.length; i++) {
+    if (arrCount[i] > max) {
+        maxIndex = i;
+        max = arrCount[i];
+    }
+}
+
+
+
+str += Math.floor(mean).toString();
+str += median.toString();
+str += maxIndex.toString();
+str += sufix;
+
+window.location.href = 'http://www.rankk.org/challenges/averages.py?solution='+str
+
+
