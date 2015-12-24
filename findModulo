@@ -1,0 +1,10 @@
+function achaModulo(start, end){
+for(var j = start; j <= end; j++){
+ var achou = true;
+ for(var i = 2; i <= 10; i++)
+  if(j%i != i-1) achou &= false;
+
+if(achou) return j;
+}
+return 0;
+}
